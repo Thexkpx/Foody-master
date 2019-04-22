@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".Order">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:src="@drawable/order"
+                android:layout_width="70dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:gravity="center"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="#FF9800"
+                android:text="ORDER" />
+
+            <ImageButton
+                android:id="@+id/btn_dat"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingRight="20sp"
+                android:background="@null"
+                android:src="@drawable/buy" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="350sp"
+            android:gravity="center"
+            android:paddingLeft="20sp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Diachi:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+            <EditText
+                android:gravity="center"
+                android:id="@+id/editphong"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:textColor="#FF9800"
+                android:ems="10"
+                android:textSize="20sp"
+                android:inputType="textPersonName"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="10sp"
+                android:text="MY MENU WILL BUY"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#FF9800"
+                android:layout_width="240sp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txttotal"
+                android:layout_marginTop="10sp"
+                android:text="Total"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textColor="#E91E63"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5sp"
+            android:background="#F7BCBC"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Image"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_width="90sp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="Menu Name"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_width="130sp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="price"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="70sp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listOrder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+</RelativeLayout>
