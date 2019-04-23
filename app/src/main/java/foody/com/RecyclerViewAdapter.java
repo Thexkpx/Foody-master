@@ -21,14 +21,41 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-    private Context mContext ;
-    Button bt;
+    private Context context;
+    private List<menu> list;
+    RequestOptions options ;
+
+    public RecyclerViewAdapter(Context context, List<menu> list) {
+        this.context = context;
+        this.list = list;
+        options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.img1)
+                .error(R.drawable.img1);
+    }
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.cardview_item_food, parent, false);
+        return new MyViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        menu data = list.get(position);
+        holder.tv_menu_name.setText(data.getMenu_name());
+        holder.gia_menu.setText(String.valueOf(data.getPrice()));
+        Glide.with(context).load(data.getImage_url()).apply(options).into(holder.img);
+
+    }
 
     // Creating Volley RequestQueue.
     RequestQueue requestQueue;
@@ -48,44 +75,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         void onItemClick(int position);
     }
 
-
-    public RecyclerViewAdapter(Context mContext, List<menu> mData) {
-        this.mContext = mContext;
-        this.mData = mData;
-
-    }
     public void setOnItemClickListener(AdapterView.OnItemClickListener listener) {
         mListener = listener;
     }
     public RecyclerViewAdapter(ArrayList<menu> exampleList) {
         mData = exampleList;
     }
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view ;
-        LayoutInflater mInflater = LayoutInflater.from(mContext);
-        view = mInflater.inflate(R.layout.cardview_item_food,viewGroup,false);
-        return new MyViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder,final int position) {
-        holder.tv_menu_name.setText(mData.get(position).getMenu_name());
-        holder.img_menu_thumbnail.setImageResource(mData.get(position).getThumbnail());
-        holder.gia_menu.setText(mData.get(position).getGia());
-
-    }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return list.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_menu_name;
-        ImageView img_menu_thumbnail;
+        ImageView img;
         TextView gia_menu;
         Button btncong;
         Button btntru;
@@ -100,7 +105,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
 
             tv_menu_name = (TextView) itemView.findViewById(R.id.menu_name_id);
-            img_menu_thumbnail = (ImageView) itemView.findViewById(R.id.menu_image_id);
+            img = itemView.findViewById(R.id.menu_image_id);
             gia_menu = (TextView) itemView.findViewById(R.id.menu_gia_id);
 
             btncong = (Button) itemView.findViewById(R.id.btn_congmenu);

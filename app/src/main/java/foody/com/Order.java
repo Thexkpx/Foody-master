@@ -1,6 +1,7 @@
 package foody.com;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -109,7 +110,7 @@ public class Order extends AppCompatActivity {
                         }
                     };
                     queue.add(postRequest);
-
+                    btnbuyclick();
 
                     Toast.makeText(Order.this,"Complete",Toast.LENGTH_LONG).show();
                 }else{
@@ -117,6 +118,11 @@ public class Order extends AppCompatActivity {
                 }
             }
         });
+
+    }
+    private void btnbuyclick() {
+        Intent intentOrder = new Intent(Order.this, MenuActivity.class);
+        startActivity(intentOrder);
     }
 
     private void getData() {

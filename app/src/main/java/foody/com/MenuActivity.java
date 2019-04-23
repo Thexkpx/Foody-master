@@ -1,22 +1,41 @@
 package foody.com;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
-    List<menu> lstMenu ;
+    private String url = "http://hoctiengviet.net/food_order/json/get_menu.php";
+    private RecyclerView mList;
+    private LinearLayoutManager linearLayoutManager;
+    private DividerItemDecoration dividerItemDecoration;
+    private List<menu> movieList;
+    private RecyclerView.Adapter adapter;
+
     private RecyclerViewAdapter mAdapter;
     ImageButton btn_cart;
 
@@ -25,27 +44,21 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        mList = findViewById(R.id.recyclerview_id);
 
-        lstMenu = new ArrayList<>();
-        lstMenu.add(new menu("T1","Categorie","Description menu","25000",R.drawable.img1));
-        lstMenu.add(new menu("T2","Categorie","Description menu","20000",R.drawable.img2));
-        lstMenu.add(new menu("T3","Categorie","Description menu","25000",R.drawable.img3));
-        lstMenu.add(new menu("Test menu 4","Categorie","Description menu","25000",R.drawable.img4));
-        lstMenu.add(new menu("Test menu 5","Categorie","Description menu","30000",R.drawable.img5));
-        lstMenu.add(new menu("Test menu 6","Categorie","Description menu","30000",R.drawable.img6));
-        lstMenu.add(new menu("Test menu 7","Categorie","Description menu","30000",R.drawable.img7));
-        lstMenu.add(new menu("Test menu 8","Categorie","Description menu","20000",R.drawable.img1));
-        lstMenu.add(new menu("Test menu 9","Categorie","Description menu","20000",R.drawable.img2));
-        lstMenu.add(new menu("Test menu 10","Categorie","Description menu","25000",R.drawable.img3));
-        lstMenu.add(new menu("Test menu 11","Categorie","Description menu","25000",R.drawable.img4));
-        lstMenu.add(new menu("Test menu 12","Categorie","Description menu","22000",R.drawable.img5));
-        lstMenu.add(new menu("Test menu 13","Categorie","Description menu","20000",R.drawable.img6));
-        lstMenu.add(new menu("Test menu 14","Categorie","Description menu","25000",R.drawable.img7));
+        movieList = new ArrayList<>();
+        adapter = new RecyclerViewAdapter(getApplicationContext(),movieList);
 
-        RecyclerView myrv = findViewById(R.id.recyclerview_id);
-        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(this,lstMenu);
-        myrv.setLayoutManager(new GridLayoutManager(this,3));
-        myrv.setAdapter(myAdapter);
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        dividerItemDecoration = new DividerItemDecoration(mList.getContext(), linearLayoutManager.getOrientation());
+
+        mList.setHasFixedSize(true);
+        mList.setLayoutManager(linearLayoutManager);
+        mList.addItemDecoration(dividerItemDecoration);
+        mList.setAdapter(adapter);
+
+        getData();
 
         btn_cart = findViewById(R.id.btn_cart);
         btn_cart.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +72,42 @@ public class MenuActivity extends AppCompatActivity {
     private void btncartclick(){
         Intent intentOrder = new Intent(MenuActivity.this,Order.class);
         startActivity(intentOrder);
+    }
+    private void getData() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        menu getjson = new menu();
+                        getjson.setMenu_name(jsonObject.getString("name"));
+                        getjson.setPrice(jsonObject.getInt("price"));
+                        getjson.setImage_url(jsonObject.getString("image"));
+
+                        movieList.add(getjson);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        progressDialog.dismiss();
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley", error.toString());
+                progressDialog.dismiss();
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
     }
 
 }
