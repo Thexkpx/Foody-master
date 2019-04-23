@@ -24,6 +24,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Order extends AppCompatActivity {
     List<order_class> lstMenu ;
@@ -44,13 +48,16 @@ public class Order extends AppCompatActivity {
     private DividerItemDecoration dividerItemDecoration;
     private List<movie> movieList;
     private RecyclerView.Adapter adapter;
+    private DatabaseReference mDatabase;
+// ...
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-
-
+        FirebaseApp.initializeApp(MySuperAppApplication.getContext());
+        final Random random = new Random();
         mList = findViewById(R.id.listOrder);
 
         movieList = new ArrayList<>();
@@ -78,6 +85,13 @@ public class Order extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(phong.getText() != null ){
+                   //   FirebaseDatabase database = FirebaseDatabase.getInstance();
+                   // DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child("b7da879XqcgpVslLMZrXx794MYl2").child("diachi");
+                    int mi = random.nextInt(9999 - 1000) + 1000;
+                    //ref.setValue(mi);
+
+                    mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.child("users").child("b7da879XqcgpVslLMZrXx794MYl2").child("diachi").setValue(mi);
 
 
                     String HttpUrl = "http://hoctiengviet.net/food_order/buynow.php";

@@ -3,6 +3,8 @@ package foody.com;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.firebase.FirebaseApp;
+
 public class MySuperAppApplication extends Application {
     private static Application instance;
 
@@ -10,6 +12,7 @@ public class MySuperAppApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        FirebaseApp.initializeApp(MySuperAppApplication.getContext());
     }
 
     public static Context getContext() {
