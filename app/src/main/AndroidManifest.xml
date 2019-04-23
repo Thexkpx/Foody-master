@@ -16,12 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".dsquan"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".dsquan" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Order" />
-
-
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_login">

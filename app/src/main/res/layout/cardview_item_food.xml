@@ -1,82 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
-    android:layout_height="190dp"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     cardview:cardCornerRadius="4dp">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         
         <ImageView
             android:id="@+id/menu_image_id"
-            android:layout_width="match_parent"
-            android:layout_height="130sp"
+            android:layout_width="150dp"
+            android:layout_height="110sp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
             android:background="#2d2d2d"/>
         <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <TextView
                 android:id="@+id/menu_name_id"
                 android:textColor="#2d2d2d"
-                android:textSize="12sp"
+                android:textSize="23dp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="80dp"
                 android:text="menu name"/>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/menu_gia_id"
                     android:textColor="#FF5722"
-                    android:textSize="11sp"
-                    android:gravity="right"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
                     android:text="gia menu"/>
                 <TextView
                     android:textColor="#FF5722"
-                    android:textSize="11sp"
+                    android:textSize="18dp"
+                    android:layout_weight="2"
                     android:gravity="left"
-                    android:layout_width="55dp"
-                    android:layout_height="wrap_content"
-                    android:text=" đ"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="đ"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1.3"
+            android:orientation="vertical">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <Button
+                    android:id="@+id/btn_trumenu"
+                    android:layout_width="25dp"
+                    android:padding="0dp"
+                    android:layout_height="30dp"
+                    android:text="-" />
+                <TextView
+                    android:id="@+id/txt_slmenu"
+                    android:layout_width="30dp"
+                    android:text="1"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:layout_height="30dp" />
+                <Button
+                    android:id="@+id/btn_congmenu"
+                    android:layout_width="25dp"
+                    android:padding="0dp"
+                    android:layout_height="30dp"
+                    android:text="+" />
             </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/btn_trumenu"
-                        android:layout_width="25dp"
-                        android:padding="0dp"
-                        android:layout_height="30dp"
-                        android:text="-" />
-
-                    <TextView
-                        android:id="@+id/txt_slmenu"
-                        android:layout_width="15dp"
-                        android:text="1"
-                        android:gravity="center"
-                        android:padding="0dp"
-                        android:layout_height="30dp" />
-                    <Button
-                        android:id="@+id/btn_congmenu"
-                        android:layout_width="25dp"
-                        android:padding="0dp"
-                        android:layout_height="30dp"
-                        android:text="+" />
                     <Button
                         android:id="@+id/btn_addcart"
                         android:text="Add"
@@ -84,10 +98,8 @@
                         android:textColor="#4CAF50"
                         android:padding="0dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="32dp" />
+                        android:layout_height="40dp" />
                 </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
 
 </android.support.v7.widget.CardView>
