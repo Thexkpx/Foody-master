@@ -86,6 +86,7 @@ public class MenuActivity extends AppCompatActivity {
                         JSONObject jsonObject = response.getJSONObject(i);
 
                         menu getjson = new menu();
+                        getjson.setMenu_id(jsonObject.getInt("id"));
                         getjson.setMenu_name(jsonObject.getString("name"));
                         getjson.setPrice(jsonObject.getInt("price"));
                         getjson.setImage_url(jsonObject.getString("image"));

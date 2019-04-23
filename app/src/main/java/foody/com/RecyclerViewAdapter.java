@@ -51,6 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         menu data = list.get(position);
+        holder.menu_id.setText(String.valueOf(data.getMenu_id()));
         holder.tv_menu_name.setText(data.getMenu_name());
         holder.gia_menu.setText(String.valueOf(data.getPrice()));
         Glide.with(context).load(data.getImage_url()).apply(options).into(holder.img);
@@ -91,6 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView tv_menu_name;
         ImageView img;
+        TextView menu_id;
         TextView gia_menu;
         Button btncong;
         Button btntru;
@@ -107,7 +109,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tv_menu_name = (TextView) itemView.findViewById(R.id.menu_name_id);
             img = itemView.findViewById(R.id.menu_image_id);
             gia_menu = (TextView) itemView.findViewById(R.id.menu_gia_id);
-
+            menu_id = (TextView) itemView.findViewById(R.id.menu_id);
             btncong = (Button) itemView.findViewById(R.id.btn_congmenu);
             btntru = (Button) itemView.findViewById(R.id.btn_trumenu);
             slmenu = (TextView) itemView.findViewById(R.id.txt_slmenu);
@@ -168,8 +170,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                                 Map<String, String> params = new HashMap<String, String>();
                                // params.put("name", "Alif");
                                // params.put("domain", "http://itsalif.info");
-                                params.put("ten_menu", tv_menu_name.getText().toString());
-                                params.put("giamenu", gia_menu.getText().toString());
+
+                                params.put("menu_id", menu_id.getText().toString());
                                 params.put("soluong", slmenu.getText().toString());
                                 return params;
                             }

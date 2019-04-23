@@ -15,7 +15,7 @@
         
         <ImageView
             android:id="@+id/menu_image_id"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="110sp"
             android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
@@ -26,17 +26,37 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/menu_name_id"
-                android:textColor="#2d2d2d"
-                android:textSize="23dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:text="menu name"/>
             <LinearLayout
                 android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/menu_id"
+                    android:textColor="#2d2d2d"
+                    android:textSize="23dp"
+                    android:textStyle="bold"
+                    android:layout_weight="4"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1"/>
+                <TextView
+                    android:id="@+id/menu_name_id"
+                    android:textColor="#2d2d2d"
+                    android:textSize="23dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="menu name"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView

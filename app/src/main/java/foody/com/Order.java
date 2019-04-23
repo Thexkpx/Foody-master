@@ -101,6 +101,7 @@ public class Order extends AppCompatActivity {
                                 public void onResponse(String response) {
                                     Log.d("respon", response);
                                     Toast.makeText(MySuperAppApplication.getContext(), response, Toast.LENGTH_LONG).show();
+
                                 }
                             },
                             new Response.ErrorListener() {
@@ -119,7 +120,6 @@ public class Order extends AppCompatActivity {
                             // params.put("name", "Alif");
                             // params.put("domain", "http://itsalif.info");
                             params.put("diachi", phong.getText().toString());
-
                             return params;
                         }
                     };
@@ -151,9 +151,8 @@ public class Order extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
                         movie movie = new movie();
-                        movie.setTen_menu(jsonObject.getString("ten_menu"));
+                        movie.setTen_menu(jsonObject.getString("menu_id"));
                         movie.setSoluong(jsonObject.getInt("soluong"));
-                        movie.setGiamenu(jsonObject.getInt("giamenu"));
 
                         movieList.add(movie);
                     } catch (JSONException e) {
