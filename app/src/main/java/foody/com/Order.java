@@ -162,7 +162,9 @@ public class Order extends AppCompatActivity {
 
                         JSONObject jsonObject = response.getJSONObject(i);
                         movie movie = new movie();
-                        movie.setTen_menu(jsonObject.getString("menu_id"));
+                        movie.setGiamenu(jsonObject.getInt("price"));
+                        movie.setImage_url(jsonObject.getString("image"));
+                        movie.setTen_menu(jsonObject.getString("name"));
                         movie.setSoluong(jsonObject.getInt("soluong"));
 
                         movieList.add(movie);
