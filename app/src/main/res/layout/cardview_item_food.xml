@@ -33,7 +33,7 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/menu_id"
-                    android:textColor="#2d2d2d"
+                    android:textColor="#fff"
                     android:textSize="23dp"
                     android:textStyle="bold"
                     android:layout_weight="4"
@@ -68,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:text="gia menu"/>
+
                 <TextView
                     android:textColor="#FF5722"
                     android:textSize="18dp"
@@ -77,6 +78,13 @@
                     android:layout_height="80dp"
                     android:text="đ"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/textusername"
+                android:text="text"
+                android:textColor="#fff"
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout

@@ -24,6 +24,16 @@
             android:textSize="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/txtname"
+            android:text="text"
+            android:gravity="center_vertical"
+            android:layout_weight="2"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <ImageButton
             android:id="@+id/btn_cart"

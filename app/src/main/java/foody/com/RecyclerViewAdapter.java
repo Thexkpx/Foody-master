@@ -2,6 +2,8 @@ package foody.com;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -24,15 +26,25 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
+import java.util.UUID;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import static android.content.Context.WIFI_SERVICE;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
     private Context context;
     private List<menu> list;
     RequestOptions options ;
+    Random random = new Random();
+    String id = UUID.randomUUID().toString();
 
     public RecyclerViewAdapter(Context context, List<menu> list) {
         this.context = context;
@@ -41,6 +53,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .centerCrop()
                 .placeholder(R.drawable.img1)
                 .error(R.drawable.img1);
+
+
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -100,6 +114,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Button addcart;
         EditText dc;
         TextView tvdc;
+        TextView textViewusernae;
+        TextView txtusernamecard;
+        Random random = new Random();
+
+        final int mi = random.nextInt(9999 - 1000) + 1000;
+        final String t= Integer.toString(mi);
+       // String id = UUID.randomUUID().toString();
+
+
 
         RequestQueue queue = Volley.newRequestQueue(MySuperAppApplication.getContext());
         public MyViewHolder(final View itemView) {
@@ -110,11 +133,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             img = itemView.findViewById(R.id.menu_image_id);
             gia_menu = (TextView) itemView.findViewById(R.id.menu_gia_id);
             menu_id = (TextView) itemView.findViewById(R.id.menu_id);
+            textViewusernae = (TextView) itemView.findViewById(R.id.txtname);
             btncong = (Button) itemView.findViewById(R.id.btn_congmenu);
             btntru = (Button) itemView.findViewById(R.id.btn_trumenu);
             slmenu = (TextView) itemView.findViewById(R.id.txt_slmenu);
             addcart = (Button) itemView.findViewById(R.id.btn_addcart);
-
+            txtusernamecard=(TextView) itemView.findViewById(R.id.textusername);
+         //   txtusernamecard.setText(textViewusernae.getText().toString());
          //   dc = (EditText) itemView.findViewById(R.id.editdiachi);
 
             btncong.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +163,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
                 }
             });
-
             addcart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -151,6 +175,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
+
                                         Log.d("respon", response);
                                         Toast.makeText(MySuperAppApplication.getContext(), response, Toast.LENGTH_LONG).show();
                                     }
@@ -168,9 +193,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                             protected Map<String, String> getParams()
                             {
                                 Map<String, String> params = new HashMap<String, String>();
-                               // params.put("name", "Alif");
-                               // params.put("domain", "http://itsalif.info");
 
+                                 // params.put("name", "Alif");
+                               // params.put("domain", "http://itsalif.info");
+                                WifiManager wifiMan = (WifiManager) MySuperAppApplication.getContext().getSystemService(Context.WIFI_SERVICE);
+                                WifiInfo wifiInf = wifiMan.getConnectionInfo();
+                                int ipAddress = wifiInf.getIpAddress();
+                                String ip = String.format("%d.%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
+
+                               params.put("username",ip);
                                 params.put("menu_id", menu_id.getText().toString());
                                 params.put("soluong", slmenu.getText().toString());
                                 return params;

@@ -1,7 +1,10 @@
 package foody.com;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -81,6 +84,13 @@ public class Order extends AppCompatActivity {
         btnbye = findViewById(R.id.btn_dat);
         phong = findViewById(R.id.editphong);
 
+
+
+
+            // addcart.setText(tv_menu_name.getText());
+
+
+
         btnbye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +159,7 @@ public class Order extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
                     try {
+
                         JSONObject jsonObject = response.getJSONObject(i);
                         movie movie = new movie();
                         movie.setTen_menu(jsonObject.getString("menu_id"));

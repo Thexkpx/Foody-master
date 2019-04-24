@@ -35,7 +35,8 @@ public class MenuActivity extends AppCompatActivity {
     private DividerItemDecoration dividerItemDecoration;
     private List<menu> movieList;
     private RecyclerView.Adapter adapter;
-
+    TextView txtname;
+    TextView txtusernamecard;
     private RecyclerViewAdapter mAdapter;
     ImageButton btn_cart;
 
@@ -45,6 +46,10 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         mList = findViewById(R.id.recyclerview_id);
+        txtusernamecard = findViewById(R.id.textusername);
+        txtname = findViewById(R.id.txtname);
+//        String txt = getIntent().getExtras().getString("username");
+  //      txtname.setText(txt);
 
         movieList = new ArrayList<>();
         adapter = new RecyclerViewAdapter(getApplicationContext(),movieList);
